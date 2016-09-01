@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     userDB.insert(new User(username, password, email)).then(writeResult => {
         req.session.loggedIn = true;
         req.session.userId = writeResult.insertedId;
-        res.status(200).send({success: true, Username: username, Email: email});
+        res.status(200).send({success: true, User: {_id: writeResult.insertedId, Username: username, Email: email}});
     }).catch(err => {
         res.status(400).send({success: false, err: "Username taken"})
     });

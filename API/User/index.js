@@ -9,5 +9,6 @@ const router  = express.Router();
 
 router.use('/add', require('./add'));
 router.use('/login', require('./login'));
+router.use('/get', require('./get'));
 
 module.exports = router;

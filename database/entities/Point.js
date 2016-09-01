@@ -5,16 +5,16 @@
 class Point {
     constructor(lon, lat) {
         if (lon && lon.type === "Point" && lon.coordinates) {
-            this.Longitude = lon.coordinates[0];
-            this.Latitude = lon.coordinates[1];
+            this.Longitude = parseFloat(lon.coordinates[0]);
+            this.Latitude = parseFloat(lon.coordinates[1]);
         }
         else if (Array.isArray(lon)) {
-            this.Longitude = lon[0];
-            this.Latitude = lon[1];
+            this.Longitude = parseFloat(lon[0]);
+            this.Latitude = parseFloat(lon[1]);
         }
         else {
-            this.Longitude = lon;
-            this.Latitude = lat;
+            this.Longitude = parseFloat(lon);
+            this.Latitude = parseFloat(lat);
         }
     }
 

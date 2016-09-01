@@ -12,13 +12,14 @@ const logger = require('../../utils/logger');
 const Image = require('../../database/Image').Image;
 const img = require('../../database/Image');
 const rand_str = require("randomstring");
+const Point = require('../../database/entities/Point');
 
 function getRandomPath() {
     return `${rand_str.generate(20)}.png`;
 }
 
 router.post((req, res) => {
-    let location = req.body.Location,
+    let location = new Point(req.body.Longitude, req.body.Latitude),
         time = req.body.Time ? new Date(req.body.Time) : new Date(),
         price = req.body.Price || 1,
         events = req.body.Events || [];
@@ -37,7 +38,7 @@ router.post((req, res) => {
                 res.status(500).send({success: false, err: "Something failed"});
                 return;
             }
-            img.insert(new Image(req.session.userId, `/${filename}`, location, time, price, events)).then(() => res.status(200).send({success: true, filePath})).catch(err => {
+            img.insert(new Image(req.session.userId, `/${filename}`, location.toGeoJson(), time, price, events)).then(writeResult => res.status(200).send({success: true, Image: {path: filePath, _id: writeResult.insertedId}})).catch(err => {
                 logger.error(err);
                 res.status(500).send({success: false, err: "Something failed"});
             });

@@ -11,7 +11,19 @@ function insert(image) {
     return mongo.getClient().then(client => client.collection('Image').insertOne(image));
 }
 
+
+function getNear(location, distance = 2000) {
+    let yesterday = new Date(Date.now() - day);
+    return mongo.getClient().then(client => client.collection('Image').aggregate().geoNear({
+        near: location,
+        distanceField: "distance",
+        maxDistance: distance,
+        spherical: true,
+        query: { Start: {$gt: yesterday} }
+    }).toArray());
+}
+
 module.exports = {
     Image,
     insert
-}
+};

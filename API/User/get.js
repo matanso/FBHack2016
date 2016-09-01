@@ -6,23 +6,16 @@
 
 const express = require('express');
 const router  = express.Router();
-
-const User = require('../../database/User').User;
 const userDB = require('../../database/User');
 const logger = require('../../utils/logger');
 
 //noinspection JSUnresolvedFunction
-router.post('/', (req, res) => {
-    let username = req.body.Username,
-        password = req.body.Password;
-    if(!username || !password) {
-        return res.status(400).send('Bad parameters');
-    }
-    userDB.getByParams(username, password).then(user => {
+router.get('/', (req, res) => {
+    logger.info(JSON.stringify(req.session));
+    if(!req.session.loggedIn) return res.status(401).send({success: false, err: "Not logged in"});
+    userDB.getSafe(req.session.userId).then(user => {
         if(user) {
-            req.session.loggedIn = true;
-            req.session.userId = user._id;
-            return res.status(200).send({success: true, User: {_id: user._id, Username: username, Email: user.Email}});
+            return res.status(200).send({success: true, User: {_id: user._id, Username: user.Username, Email: user.Email}});
         }
         return res.status(403).send({success: false, err: "No such user"});
     }).catch(err => {
