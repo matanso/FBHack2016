@@ -5,10 +5,11 @@
 const md5 = require('../../utils/md5');
 
 class User {
-    constructor(username, password, email) {
+    constructor(username, password, email, balance = 0) {
         this.Username = username;
         this.PassHash = md5.md5Hash(password);
         this.Email = email;
+        this.Balance = balance;
     }
 }
 
