@@ -9,7 +9,7 @@
     "maxFiles": 10
   },
   "mongodb": {
-    "host": "localhost",
+    "host": "1.1.0.142",
     "port": 27017,
     "database": "greenlight"
   }
