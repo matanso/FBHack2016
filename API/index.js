@@ -10,7 +10,7 @@ const router = express.Router();
 router.use('/User', require('./User'));
 router.use('/', (req, res, next) => {
     if(req.session.loggedIn && req.session.userId) next();
-    else res.status(401).send({success: false, err: "You are not logged in"});
+    else res.redirect('/login');
 });
 router.use('/Image', require('./Image'));
 router.use('/Event', require('./Event'));

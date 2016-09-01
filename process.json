@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "greenlight",
+      "name": "fbhack",
       "script": "index.js",
       "watch": true,
       "ignore_watch" : ["node_modules/*", "logs/*"],

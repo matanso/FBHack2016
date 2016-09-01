@@ -41,7 +41,6 @@ router.post((req, res) => {
                 logger.error(err);
                 res.status(500).send({success: false, err: "Something failed"});
             });
-            res.redirect("back");
         });
     });
 });

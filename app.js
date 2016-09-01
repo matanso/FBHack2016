@@ -11,6 +11,15 @@ const app = express();
 const api = require('./API');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const path = require('path');
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(session({
     secret: 'keyboard cat',
@@ -21,6 +30,7 @@ app.use(session({
 
 app.use(morgan('dev', {stream: logger.stream('info')}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.use('/api', api);
 
