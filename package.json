@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start process.json"
+    "start": "pm2 start process.json",
+    "stop": "pm2 stop process.json"
   },
   "author": "GreenLight corp",
   "license": "ISC",
