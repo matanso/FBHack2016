@@ -11,8 +11,8 @@ const app = express();
 
 app.use(morgan('dev', {stream: logger.stream('info')}));
 
-app.get('/', (req, res) => {
-    res.status(200).send('שיניתי');
+app.get('/:param', (req, res) => {
+    res.status(200).send(`${req.params.param}, you are a fucking faggot. Also this is such a stupid idea. Let's build some fucking amazing live chatrooms with cool animations instead!!!!!! `);
 });
 
 module.exports = app;
