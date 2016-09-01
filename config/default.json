@@ -11,6 +11,6 @@
   "mongodb": {
     "host": "1.1.0.142",
     "port": 27017,
-    "database": "greenlight"
+    "database": "fbhack"
   }
 }
