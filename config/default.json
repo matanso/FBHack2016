@@ -1,0 +1,11 @@
+{
+  "server": {
+    "port": 3000
+  },
+  "logs": {
+    "filename": "./logs/server.log",
+    "level": "verbose",
+    "maxsize": "10485760",
+    "maxFiles": 10
+  }
+}
