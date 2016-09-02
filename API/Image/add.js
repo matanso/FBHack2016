@@ -42,8 +42,8 @@ router.post('/', upload.single('image'), (req, res) => {
                 res.status(500).send({success: false, err: "Something failed"});
                 return;
             }
-            let image = new Image(req.session.userId, `/imgs/${filePath}`);
-            img.insert(image, location.toGeoJson(), time, price, events).then(writeResult => res.status(200).send({success: true, Image: {path: image.Link, _id: writeResult.insertedId}})).catch(err => {
+            let image = new Image(req.session.userId, `/imgs/${filePath}`, location.toGeoJson(), time, price, events);
+            img.insert(image).then(writeResult => res.status(200).send({success: true, Image: {path: image.Link, _id: writeResult.insertedId}})).catch(err => {
                 logger.error(err);
                 res.status(500).send({success: false, err: "Something failed"});
             });

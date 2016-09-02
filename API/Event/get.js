@@ -8,6 +8,7 @@ const express = require('express');
 const router  = express.Router();
 const eventDB = require('../../database/Event');
 const Point = require('../../database/entities/Point');
+const logger = require('../../utils/logger');
 
 router.get('/nearby', (req, res) => {
     let distance = parseFloat(req.query.distance || '2000');
@@ -16,6 +17,9 @@ router.get('/nearby', (req, res) => {
             success: true,
             Events: result
         });
+    }).catch(err => {
+        logger.error(err);
+        res.status(500).send('something went wrong');
     });
 });
 

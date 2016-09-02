@@ -12,6 +12,7 @@ class Image {
         this.Time = time;
         this.Price = price;
         this.Suggested = events;
+        this.Purchases = 0;
     }
 }
 
